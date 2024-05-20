@@ -23,11 +23,11 @@ namespace lab13.WpfWindows
     public partial class AddProductWindow : Window
     {
 
-        ProductsSellsEntities _db;
+        ProductSalesEntities _db;
 
         string imageProduct = null;
 
-        public AddProductWindow(ProductsSellsEntities db)
+        public AddProductWindow(ProductSalesEntities db)
         {
             InitializeComponent();
 

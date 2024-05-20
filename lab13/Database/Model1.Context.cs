@@ -13,10 +13,10 @@ namespace lab13.Database
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ProductsSellsEntities : DbContext
+    public partial class ProductSalesEntities : DbContext
     {
-        public ProductsSellsEntities()
-            : base("name=ProductsSellsEntities")
+        public ProductSalesEntities()
+            : base("name=ProductSalesEntities")
         {
         }
     

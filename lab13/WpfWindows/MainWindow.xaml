@@ -22,7 +22,7 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button Content="Открыть товар" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,5,5,5" Background="White" Height="30">
+            <Button Content="Открыть товар" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,5,5,5" Background="White" Height="30" Click="OpenProduct_Click">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"></Setter>
@@ -30,22 +30,22 @@
                 </Button.Resources>
             </Button>
         </ToolBar>
-        <ListView Name="listProduct" Grid.Row="1">
+        <ListView Name="listProduct" Grid.Row="1" MouseDoubleClick="listProduct_MouseDoubleClick">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
 
-                        <Image Width="100" Height="75" Source="{Binding Path=ImageProduct}"></Image>
+                        <Image Width="130" Height="130" Source="{Binding Path=ImageProduct}"></Image>
 
                         <Border Margin="50 5 0 0" CornerRadius="10" BorderThickness="1" BorderBrush="#A1BCC6" VerticalAlignment="Top">
-                            <StackPanel Orientation="Vertical" Width="250" Height="75">
+                            <StackPanel Orientation="Vertical" Width="350" Height="125">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Наименование: " FontSize="18" HorizontalAlignment="Center"></TextBlock>
-                                    <TextBlock Text="{Binding Path=Name}" FontSize="18" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Text="{Binding Path=Name}" FontSize="20" HorizontalAlignment="Center"></TextBlock>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Цена: " FontSize="18" HorizontalAlignment="Center"></TextBlock>
-                                    <TextBlock Text="{Binding Path=Price}" FontSize="18" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Text="{Binding Path=Price}" FontSize="20" HorizontalAlignment="Center"></TextBlock>
                                 </StackPanel>
                             </StackPanel>
                         </Border>

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище ProductsSellsModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище ProductSalesModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="Id_Product" />
@@ -12,15 +12,15 @@
           <Property Name="Id_Product" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Image" Type="nvarchar(max)" />
+          <Property Name="Image" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductSales">
           <Key>
             <PropertyRef Name="Id_Product_Sale" />
           </Key>
           <Property Name="Id_Product_Sale" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Sale_date" Type="datetime" Nullable="false" />
           <Property Name="Id_Product" Type="int" />
+          <Property Name="Sale_Date" Type="datetime" Nullable="false" />
           <Property Name="Amount" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_ProductSales_Product">
@@ -37,7 +37,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Хранилище ProductsSellsModelContainer">
+        <EntityContainer Name="Хранилище ProductSalesModelContainer">
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductSales" EntityType="Self.ProductSales" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_ProductSales_Product" Association="Self.FK_ProductSales_Product">
@@ -49,7 +49,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="ProductsSellsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="ProductSalesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="Id_Product" />
@@ -57,7 +57,7 @@
           <Property Name="Id_Product" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="ProductSales" Relationship="Self.FK_ProductSales_Product" FromRole="Product" ToRole="ProductSales" />
         </EntityType>
         <EntityType Name="ProductSales">
@@ -65,8 +65,8 @@
             <PropertyRef Name="Id_Product_Sale" />
           </Key>
           <Property Name="Id_Product_Sale" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Sale_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Id_Product" Type="Int32" />
+          <Property Name="Sale_Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Amount" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Product" Relationship="Self.FK_ProductSales_Product" FromRole="ProductSales" ToRole="Product" />
         </EntityType>
@@ -84,7 +84,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ProductsSellsEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ProductSalesEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Product" EntityType="Self.Product" />
           <EntitySet Name="ProductSales" EntityType="Self.ProductSales" />
           <AssociationSet Name="FK_ProductSales_Product" Association="Self.FK_ProductSales_Product">
@@ -97,9 +97,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище ProductsSellsModelContainer" CdmEntityContainer="ProductsSellsEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ProductSalesModelContainer" CdmEntityContainer="ProductSalesEntities">
           <EntitySetMapping Name="Product">
-            <EntityTypeMapping TypeName="ProductsSellsModel.Product">
+            <EntityTypeMapping TypeName="ProductSalesModel.Product">
               <MappingFragment StoreEntitySet="Product">
                 <ScalarProperty Name="Id_Product" ColumnName="Id_Product" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -109,11 +109,11 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ProductSales">
-            <EntityTypeMapping TypeName="ProductsSellsModel.ProductSales">
+            <EntityTypeMapping TypeName="ProductSalesModel.ProductSales">
               <MappingFragment StoreEntitySet="ProductSales">
                 <ScalarProperty Name="Id_Product_Sale" ColumnName="Id_Product_Sale" />
-                <ScalarProperty Name="Sale_date" ColumnName="Sale_date" />
                 <ScalarProperty Name="Id_Product" ColumnName="Id_Product" />
+                <ScalarProperty Name="Sale_Date" ColumnName="Sale_Date" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
               </MappingFragment>
             </EntityTypeMapping>
