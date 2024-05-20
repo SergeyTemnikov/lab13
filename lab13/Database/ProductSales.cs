@@ -15,8 +15,8 @@ namespace lab13.Database
     public partial class ProductSales
     {
         public int Id_Product_Sale { get; set; }
-        public System.DateTime Sale_date { get; set; }
         public Nullable<int> Id_Product { get; set; }
+        public System.DateTime Sale_Date { get; set; }
         public int Amount { get; set; }
     
         public virtual Product Product { get; set; }

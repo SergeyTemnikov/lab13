@@ -22,7 +22,8 @@ namespace lab13.WpfWindows
     public partial class MainWindow : Window
     {
 
-        ProductsSellsEntities _db = new ProductsSellsEntities();
+        ProductSalesEntities _db = new ProductSalesEntities();
+
 
         public MainWindow()
         {
@@ -37,6 +38,33 @@ namespace lab13.WpfWindows
             window.ShowDialog();
             listProduct.ItemsSource = null;
             listProduct.ItemsSource = _db.Product.ToList();
+        }
+
+        private void OpenProduct_Click(object sender, RoutedEventArgs e)
+        {
+            if(listProduct.SelectedValue != null)
+            {
+                ProductSalesWindow window = new ProductSalesWindow(listProduct.SelectedValue as Product, _db);
+                window.ShowDialog();              
+            }
+            else
+            {
+                MessageBox.Show("Вы не выбрали товар!");
+            }
+            
+        }
+
+        private void listProduct_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (listProduct.SelectedValue != null)
+            {
+                ProductSalesWindow window = new ProductSalesWindow(listProduct.SelectedValue as Product, _db);
+                window.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Вы не выбрали товар!");
+            }
         }
     }
 }
